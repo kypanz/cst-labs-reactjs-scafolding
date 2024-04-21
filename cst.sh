@@ -1,26 +1,21 @@
 #!/bin/bash
 
-# Script developed by Consistent Labs
+# Script developed from Consistent Labs
 # By kypanz - i am consistent, not perfect
-# 
 
-# Definir la ruta base del proyecto React
+# Define the routes for the Reactjs project
 proyecto_path="./"
 name_folder_components="components"
 name_folder_utils="utils"
 name_folder_redux="redux"
 
 # ------ FUNCTIONS ----
-
 create_component() {
     name=$1
-    # Verifica si existe la el archivo .tsx del componente y crea el archivo
     if [ ! -d "$proyecto_path/src/$name" ]; then
         echo "Creando la carpeta del componente"
         mkdir "./src/$name_folder_components/$name"
     fi
-
-    # Verifica si existe la carpeta del componente y crea el archivo
     if [ ! -d "$proyecto_path/src/$name/$name" ]; then
         echo "Creando el archivo del componente"
         touch "./src/$name_folder_components/$name/$name.tsx"
@@ -30,13 +25,10 @@ create_component() {
 
 create_util() {
     name=$1
-    # Verifica si existe la el archivo .tsx del componente y crea el archivo
     if [ ! -d "$proyecto_path/src/$name" ]; then
         echo "Creando carpeta del archivo util"
         mkdir "./src/$name_folder_utils/$name"
     fi
-
-    # Verifica si existe la carpeta del componente y crea el archivo
     if [ ! -d "$proyecto_path/src/$name/$name" ]; then
         echo "Creando el archivo del util"
         touch "./src/$name_folder_utils/$name/$name.ts"
@@ -44,21 +36,34 @@ create_util() {
     echo "Componente '$name' creado exitosamente en ./src/$name_folder_utils/$name/$name.ts"
 }
 
+create_slice(){
+  name=$1
+  if [ ! -d "$proyecto_path/src/$name_folder_redux/$name" ]; then
+        echo "Creating the slice folder"
+        mkdir "./src/$name_folder_redux/$name"
+    fi
+    if [ ! -d "$proyecto_path/src/$name_folder_redux/$name" ]; then
+        echo "Creating the slice file"
+        touch "./src/$name_folder_redux/$name/$name.ts"
+    fi
+    echo "Slide file '$name' created successful on ./src/$name_folder_redux/$name/$name.ts"
+}
+
 create_folder() {
     name_folder=$1
-    # Verificar si existe la carpeta 'src'
     if [ ! -d "$proyecto_path/src" ]; then
-        echo "Creando la carpeta 'src'..."
+        echo "Creating the folder 'src'..."
         mkdir "$proyecto_path/src"
     fi
-
-    # Verificar si existe la carpeta 'components' dentro de 'src'
     if [ ! -d "$proyecto_path/src/$name_folder" ]; then
-        echo "Creando la carpeta '$name_folder' dentro de 'src'..."
+        echo "Creating the folder '$name_folder' into the 'src'..."
         mkdir "$proyecto_path/src/$name_folder"
     fi
 }
+# ---- End functions ----
 
+
+# ---- Main ----
 action=$1
 option=$2
 name_file=$3
@@ -73,10 +78,10 @@ if [ "$action" = "new" ]; then
         create_util "$name_file"
     elif [ "$option" = "slice" ]; then
         create_folder "$name_folder_redux"
-        create_redux "$name_file"
+        create_slice "$name_file"
     else
-        echo "Selecciona una opcion valida"
+        echo "Write a valid argument"
     fi
 else
-    echo 'No mame, escribalo bien'
+    echo 'Wrong command'
 fi
