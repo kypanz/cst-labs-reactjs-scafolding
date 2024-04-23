@@ -42,7 +42,7 @@ create_slice(){
         echo "Creating the slice folder"
         mkdir "./src/$name_folder_redux/$name"
     fi
-    if [ ! -d "$proyecto_path/src/$name_folder_redux/$name" ]; then
+    if [ ! -d "$proyecto_path/src/$name_folder_redux/$name/$name.ts" ]; then
         echo "Creating the slice file"
         touch "./src/$name_folder_redux/$name/$name.ts"
     fi
